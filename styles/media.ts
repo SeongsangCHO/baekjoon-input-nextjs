@@ -1,4 +1,4 @@
-import { css } from "styled-components";
+import { DefaultTheme, css } from "styled-components";
 
 interface ISize {
   [idx: string]: number;
@@ -17,21 +17,15 @@ const sizes: ISize = {
 //   return acc;
 // }, {} as Record<keyof typeof sizes, (l: TemplateStringsArray, ...p: any[]) => string>);
 
-const media = Object.keys(sizes).reduce(
-  (acc, label) => {
-    acc[label] = (literals: TemplateStringsArray, ...placeholders: any[]) =>
-      css`
-        @media (max-width: ${sizes[label]}px) {
-          ${css(literals, ...placeholders)};
-        }
-      `.join("");
-    return acc;
-  },
-  {} as Record<
-    keyof typeof sizes,
-    (l: TemplateStringsArray, ...p: any[]) => string
-  >,
-);
+const media = Object.keys(sizes).reduce((acc, label) => {
+  acc[label] = (literals: TemplateStringsArray, ...placeholders: any[]) =>
+    css`
+      @media (max-width: ${sizes[label]}px) {
+        ${css(literals, ...placeholders)};
+      }
+    `.join("");
+  return acc;
+}, {} as Record<keyof typeof sizes, (l: TemplateStringsArray, ...p: any[]) => string>);
 
 export default media;
 // ${({ theme }) => theme.tablet`
