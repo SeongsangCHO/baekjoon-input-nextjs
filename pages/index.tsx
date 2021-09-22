@@ -11,13 +11,8 @@ interface INextPage {
 }
 
 const Home: NextPage<INextPage> = ({ mode, setMode }) => {
-  console.log("mode", mode, setMode);
-
   return (
     <PageTemplate>
-      {/* <Link href="/main/[language]">
-        <a></a>
-      </Link> */}
       <Container>
         <TitleHeader>
           <TextWrapper>
@@ -84,7 +79,20 @@ const TextWrapper = styled.div`
   font-weight: bold;
   font-size: 36px;
   padding-left: 50px;
+  animation-name: bounding;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
   & .emphasis-text {
     color: ${({ theme }) => theme.colors.landingEmphasisText};
+  }
+  @keyframes bounding {
+    from {
+      transform: translateY(5px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0px);
+      opacity: 1;
+    }
   }
 `;
